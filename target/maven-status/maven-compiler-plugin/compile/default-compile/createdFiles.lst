@@ -1,0 +1,5 @@
+HelpMojo.class
+com\indemand\automation\TestMethod.class
+com\indemand\automation\TestCase.class
+com\indemand\automation\TestSuite.class
+com\indemand\automation\SaveRegressionResultsPlugin.class
