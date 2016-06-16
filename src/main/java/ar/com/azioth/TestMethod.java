@@ -1,4 +1,4 @@
-package com.indemand.automation;
+package ar.com.azioth;
 
 /**
  * Created by ssandri on 04/06/2016.

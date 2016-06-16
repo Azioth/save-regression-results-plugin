@@ -1,4 +1,4 @@
-package com.indemand.automation;
+package ar.com.azioth;
 
 import com.google.gson.Gson;
 import org.apache.maven.plugin.AbstractMojo;
