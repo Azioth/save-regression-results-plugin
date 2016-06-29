@@ -66,6 +66,8 @@ public class SaveRegressionResultsPlugin extends AbstractMojo {
             outputStream.write(outputInBytes);
             outputStream.flush();
             outputStream.close();
+            System.out.println(httpURLConnection.getResponseCode());
+            System.out.println(httpURLConnection.getResponseMessage());
             System.out.println(httpURLConnection.getHeaderField("Content-Location"));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -162,6 +164,23 @@ public class SaveRegressionResultsPlugin extends AbstractMojo {
                             String testMethodFinishedAt_formatted = testMethodFinishedAt.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
                             // Create TestMethod Object
                             TestMethod testMethod = new TestMethod(testMethodName, className, testMethodResult, testMethodDuration, testMethodStartedAt_formatted, testMethodFinishedAt_formatted);
+
+                            if (testMethodResult.equals("FAIL")) {
+                                NodeList exception = testMethodNode.getChildNodes();
+                                for (int k = 0; k < exception.getLength(); k++) {
+                                    Node testMethodChildNode = exception.item(k);
+                                    if (testMethodChildNode.getNodeName().equals("exception")) {
+                                        testMethod.setException(testMethodChildNode.getAttributes().getNamedItem("class").getNodeValue());
+                                        NodeList exceptionChildList = testMethodChildNode.getChildNodes();
+                                        for (int l = 0; l < exceptionChildList.getLength(); l++) {
+                                            Node exceptionChildNode = exceptionChildList.item(l);
+                                            if (exceptionChildNode.getNodeName().equals("full-stacktrace")) {
+                                                testMethod.setExceptionMessage(exceptionChildNode.getTextContent());
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                             // Add TestMethod to TestCase LinkedList of TestMethods
                             testCase.addTestMethod(testMethod);
                         }

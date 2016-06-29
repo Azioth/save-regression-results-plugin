@@ -1,5 +1,5 @@
+ar\com\azioth\TestMethod.class
+ar\com\azioth\TestSuite.class
 HelpMojo.class
-com\indemand\automation\TestMethod.class
-com\indemand\automation\TestCase.class
-com\indemand\automation\TestSuite.class
-com\indemand\automation\SaveRegressionResultsPlugin.class
+ar\com\azioth\SaveRegressionResultsPlugin.class
+ar\com\azioth\TestCase.class
